@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="$(arg name)">
+
+  <!-- Enable setting arguments from the launch file -->
+  <xacro:arg name="name" default="ur5"/>
+
+  <!-- parameters -->
+  <!-- <xacro:arg name="prefix" default="" />
+  <xacro:arg name="robot_ip" default="" />
+  <xacro:arg name="local_ip" default="" />
+  <xacro:arg name="use_fake_hardware" default="false" />
+  <xacro:arg name="fake_sensor_commands" default="false" /> -->
+  <!-- <xacro:arg name="initial_positions_file" default="$(find ur5_description)/config/initial_positions.yaml"/> -->
+
+
+  <!-- include ur5 macro -->
+  <xacro:include filename="$(find ur5_description)/urdf/ur5_joints_links.xacro" />
+  <xacro:ur5_joints_links />
+
+  <!-- include ur5 ros2_control description -->
+  <!-- <xacro:include filename="$(find ur5_description)/urdf/ur5.ros2_control.xacro" />
+  <xacro:ur5_ros2_control
+    prefix="$(arg prefix)" 
+    robot_ip="$(arg robot_ip)" 
+    local_ip="$(arg local_ip)" 
+    use_fake_hardware="$(arg use_fake_hardware)" 
+    fake_sensor_commands="$(arg fake_sensor_commands)" 
+    /> -->
+
+    <!-- initial_positions_file="$(arg initial_positions_file)" -->
+
+</robot>
+
+

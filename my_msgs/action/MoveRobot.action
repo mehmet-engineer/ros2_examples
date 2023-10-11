@@ -1,0 +1,5 @@
+float64[] target_position
+---
+bool finish_success
+---
+int8 progress
