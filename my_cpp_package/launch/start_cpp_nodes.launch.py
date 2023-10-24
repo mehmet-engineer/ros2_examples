@@ -1,4 +1,4 @@
-import os, time
+import os
 from launch import LaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.actions import IncludeLaunchDescription
@@ -32,7 +32,7 @@ def generate_launch_description():
         executable = "timer_node",
     )
 
-    # LAUNCH -----------------------------------------------------------------
+    # INCLUDE LAUNCH -----------------------------------------------------------------
     description_package_name = "orion5_description"
     description_pkg_share_path = get_package_share_directory(description_package_name)
     launch_path = os.path.join(description_pkg_share_path, "launch/display_robot.launch.py")
