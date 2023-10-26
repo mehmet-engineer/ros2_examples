@@ -1,161 +1,297 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="ur5_ros2_control" params="prefix robot_ip local_ip use_fake_hardware:=^|false fake_sensor_commands:=^|false ">
-  <!-- initial_positions_file -->
-    <!-- <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_file)['initial_positions']}"/> -->
+  <xacro:macro name="ur5_ros2_control">
+
+    <gazebo>
+
+      <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so" >
+        <robot_param>robot_description</robot_param>
+        <robot_param_node>robot_state_publisher</robot_param_node>
+        <parameters>$(find gazebo_robot_sim)/config/robot_controllers.yaml</parameters>
+      </plugin>
+
+      <plugin name="gazebo_ros_ft_sensor_1" filename="libgazebo_ros_ft_sensor.so" >
+        <ros>
+          <namespace>/gazebo_sensors</namespace>
+          <remapping>wrench:=ft_sensor_1</remapping>
+        </ros>
+        <joint_name>joint1</joint_name>
+        <update_rate>50</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+
+      <plugin name="gazebo_ros_ft_sensor_2" filename="libgazebo_ros_ft_sensor.so" >
+        <ros>
+          <namespace>/gazebo_sensors</namespace>
+          <remapping>wrench:=ft_sensor_2</remapping>
+        </ros>
+        <joint_name>joint2</joint_name>
+        <update_rate>50</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+
+      <plugin name="gazebo_ros_ft_sensor_3" filename="libgazebo_ros_ft_sensor.so" >
+        <ros>
+          <namespace>/gazebo_sensors</namespace>
+          <remapping>wrench:=ft_sensor_3</remapping>
+        </ros>
+        <joint_name>joint3</joint_name>
+        <update_rate>50</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+
+      <plugin name="gazebo_ros_ft_sensor_4" filename="libgazebo_ros_ft_sensor.so" >
+        <ros>
+          <namespace>/gazebo_sensors</namespace>
+          <remapping>wrench:=ft_sensor_4</remapping>
+        </ros>
+        <joint_name>joint4</joint_name>
+        <update_rate>50</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+
+      <plugin name="gazebo_ros_ft_sensor_5" filename="libgazebo_ros_ft_sensor.so" >
+        <ros>
+          <namespace>/gazebo_sensors</namespace>
+          <remapping>wrench:=ft_sensor_5</remapping>
+        </ros>
+        <joint_name>joint5</joint_name>
+        <update_rate>50</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+
+      <plugin name="gazebo_ros_ft_sensor_6" filename="libgazebo_ros_ft_sensor.so" >
+        <ros>
+          <namespace>/gazebo_sensors</namespace>
+          <remapping>wrench:=ft_sensor_6</remapping>
+        </ros>
+        <joint_name>joint6</joint_name>
+        <update_rate>50</update_rate>
+        <gaussian_noise>0.01</gaussian_noise>
+      </plugin>
+
+    </gazebo>
 
 
-    <ros2_control name="UR5HardwareInterface" type="system">
+
+    <gazebo reference="joint1">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="joint2">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="joint3">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="joint4">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="joint5">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+    <gazebo reference="joint6">
+      <provideFeedback>true</provideFeedback>
+    </gazebo>
+
+
+
+    <ros2_control name="UR5_Arm_Hardware_Interface" type="system">
+
       <hardware>
-        <xacro:if value="${use_fake_hardware}">
-          <plugin>fake_components/GenericSystem</plugin>
-          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
-          <param name="state_following_offset">0.0</param>
-        </xacro:if>
-        <xacro:unless value="${use_fake_hardware}">
-          <plugin>ur5_hardware/UR5HardwareInterface</plugin>
-          <param name="robot_ip">${robot_ip}</param>
-          <param name="local_ip">${local_ip}</param>
-        </xacro:unless>
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
       </hardware>
 
-      <joint name="${prefix}joint1">
+      <joint name="joint1">
+
         <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
+
         <command_interface name="velocity">
-          <param name="min">-4.0944</param>
-          <param name="max">4.0944</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
-        <command_interface name="effort"/>
+
+        <command_interface name="acceleration">
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
+        </command_interface>
+
+        <command_interface name="effort">
+          <param name="min">-200.0</param>
+          <param name="max">200.0</param>
+        </command_interface>
+
         <state_interface name="position"/>
         <state_interface name="velocity"/>
+        <state_interface name="acceleration"/>
         <state_interface name="effort"/>
-        <!-- initial position for the FakeSystem -->
-        <!-- <param name="initial_position">${initial_positions['joint1']}</param>  -->
-        <param name="initial_position">0.0</param>       
+
+        <param name="initial_position">0.0</param>
+
       </joint>
 
-      <joint name="${prefix}joint2">
+      <joint name="joint2">
+
         <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
+
         <command_interface name="velocity">
-          <param name="min">-4.0944</param>
-          <param name="max">4.0944</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
-        <command_interface name="effort"/>
+
+        <command_interface name="acceleration">
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
+        </command_interface>
+
+        <command_interface name="effort">
+          <param name="min">-200.0</param>
+          <param name="max">200.0</param>
+        </command_interface>
+
         <state_interface name="position"/>
         <state_interface name="velocity"/>
+        <state_interface name="acceleration"/>
         <state_interface name="effort"/>
-        <!-- initial position for the FakeSystem -->
-        <param name="initial_position">0.0</param> 
-        <!-- <param name="initial_position">${initial_positions['joint2']}</param>        -->
+
+        <param name="initial_position">0.0</param>
+
       </joint>
 
+      <joint name="joint3">
 
-      <joint name="${prefix}joint3">
         <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
+
         <command_interface name="velocity">
-          <param name="min">-4.4435</param>
-          <param name="max">4.4435</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
-        <command_interface name="effort"/>
+
+        <command_interface name="acceleration">
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
+        </command_interface>
+
+        <command_interface name="effort">
+          <param name="min">-200.0</param>
+          <param name="max">200.0</param>
+        </command_interface>
+
         <state_interface name="position"/>
         <state_interface name="velocity"/>
+        <state_interface name="acceleration"/>
         <state_interface name="effort"/>
-        <!-- initial position for the FakeSystem -->
-        <param name="initial_position">1.57</param> 
-        <!-- <param name="initial_position">${initial_positions['joint3']}</param>       -->
+
+        <param name="initial_position">1.5</param>
+
       </joint>
 
-      <joint name="${prefix}joint4">
+      <joint name="joint4">
+
         <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
+
         <command_interface name="velocity">
-          <param name="min">-4.8869</param>
-          <param name="max">4.8869</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
-        <command_interface name="effort"/>
+
+        <command_interface name="acceleration">
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
+        </command_interface>
+
+        <command_interface name="effort">
+          <param name="min">-200.0</param>
+          <param name="max">200.0</param>
+        </command_interface>
+
         <state_interface name="position"/>
         <state_interface name="velocity"/>
+        <state_interface name="acceleration"/>
         <state_interface name="effort"/>
-        <!-- initial position for the FakeSystem -->
-        <param name="initial_position">0.0</param> 
-        <!-- <param name="initial_position">${initial_positions['joint4']}</param>      -->
+
+        <param name="initial_position">0.0</param>
+
       </joint>
 
-      <joint name="${prefix}joint5">
+      <joint name="joint5">
+
         <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
+
         <command_interface name="velocity">
-          <param name="min">-4.8869</param>
-          <param name="max">4.8869</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
-        <command_interface name="effort"/>
+
+        <command_interface name="acceleration">
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
+        </command_interface>
+
+        <command_interface name="effort">
+          <param name="min">-200.0</param>
+          <param name="max">200.0</param>
+        </command_interface>
+
         <state_interface name="position"/>
         <state_interface name="velocity"/>
+        <state_interface name="acceleration"/>
         <state_interface name="effort"/>
-        <!-- initial position for the FakeSystem -->
-        <param name="initial_position">0.0</param> 
-        <!-- <param name="initial_position">${initial_positions['joint5']}</param>         -->
+
+        <param name="initial_position">0.0</param>
+
       </joint>
-   
-      <joint name="${prefix}joint6">
+
+      <joint name="joint6">
+
         <command_interface name="position">
-          <param name="min">-2.7925</param>
-          <param name="max">2.7925</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
+
         <command_interface name="velocity">
-          <param name="min">-4.8869</param>
-          <param name="max">4.8869</param>
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
         </command_interface>
-        <command_interface name="effort"/>
+
+        <command_interface name="acceleration">
+          <param name="min">-3.14</param>
+          <param name="max">3.14</param>
+        </command_interface>
+
+        <command_interface name="effort">
+          <param name="min">-200.0</param>
+          <param name="max">200.0</param>
+        </command_interface>
+
         <state_interface name="position"/>
         <state_interface name="velocity"/>
+        <state_interface name="acceleration"/>
         <state_interface name="effort"/>
-        <!-- initial position for the FakeSystem -->
-        <param name="initial_position">0.0</param> 
-        <!-- <param name="initial_position">${initial_positions['joint6']}</param>         -->
+
+        <param name="initial_position">0.0</param>
+
       </joint>
-
-      <sensor name="${prefix}force_torque_sensor">
-        <state_interface name="force.x"/>
-        <state_interface name="force.y"/>
-        <state_interface name="force.z"/>
-        <state_interface name="torque.x"/>
-        <state_interface name="torque.y"/>
-        <state_interface name="torque.z"/>
-      </sensor>
-
-<!--       <joint name="${prefix}wrist_force_torque">
-        <command_interface name="tare_force.x"/>
-        <command_interface name="tare_force.y"/>
-        <command_interface name="tare_force.z"/>
-        <command_interface name="tare_torque.x"/>
-        <command_interface name="tare_torque.y"/>
-        <command_interface name="tare_torque.z"/>
-        <xacro:unless value="${use_fake_hardware}">
-          <state_interface name="force.x"/>
-          <state_interface name="force.y"/>
-          <state_interface name="force.z"/>
-          <state_interface name="torque.x"/>
-          <state_interface name="torque.y"/>
-          <state_interface name="torque.z"/>
-          <state_interface name="fts_faults"/>
-          <state_interface name="fts_warnings"/>
-        </xacro:unless>
-      </joint> -->
 
     </ros2_control>
 

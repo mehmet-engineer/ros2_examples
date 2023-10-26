@@ -51,12 +51,6 @@ def generate_launch_description():
         output="screen",
         parameters=[{"robot_description": ParameterValue(robot_description, value_type=str)}]
     )
-    joint_state_publisher_node = Node(
-        name="joint_state_publisher",
-        package="joint_state_publisher",
-        executable="joint_state_publisher",
-        output="screen"
-    )
     rviz_node = Node(
         name="rviz2",
         package="rviz2",
@@ -106,17 +100,46 @@ def generate_launch_description():
                    "-z", "0.5"]
     )
 
+    # ROS 2 CONTROL ----------------------------------------------------------
+
+    joint_state_broadcaster = Node(
+        name="joint_state_broadcaster",
+        package="controller_manager",
+        executable="spawner",
+        output="screen",
+        arguments=[
+            "joint_state_broadcaster",
+            "--controller-manager",
+            "/controller_manager"       
+        ]
+    )
+
+    joint_trajectory_controller = Node(
+        name="joint_trajectory_controller",
+        package="controller_manager",
+        executable="spawner",
+        output="screen",
+        arguments=[
+            "joint_trajectory_controller",
+            "--controller-manager",
+            "/controller_manager"       
+        ]
+    )
+
     # Return Launch Function -------------------------------------------------
 
     return LaunchDescription(
         [   
             rviz_arg,
-            joint_state_publisher_node,
-            robot_state_publisher_node,
             rviz_node,
+            robot_state_publisher_node,
+            
             gazebo_env_var,
             gazebo_server,
             gazebo_client,
-            spawn_robot
+            spawn_robot,
+
+            joint_state_broadcaster,
+            joint_trajectory_controller,
         ]
     )

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="ur5_transmissions">
+
+    <transmission name="joint_1_trans">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="joint1_motor" role="joint1_motor" />
+        <joint name="joint1" role="joint1">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <transmission name="joint_2_trans">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="joint2_motor" role="joint2_motor" />
+        <joint name="joint2" role="joint2">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <transmission name="joint_3_trans">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="joint3_motor" role="joint3_motor" />
+        <joint name="joint3" role="joint3">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <transmission name="joint_4_trans">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="joint4_motor" role="joint4_motor" />
+        <joint name="joint4" role="joint4">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <transmission name="joint_5_trans">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="joint5_motor" role="joint5_motor" />
+        <joint name="joint5" role="joint5">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+    <transmission name="joint_6_trans">
+        <plugin>transmission_interface/SimpleTransmission</plugin>
+        <actuator name="joint6_motor" role="joint6_motor" />
+        <joint name="joint6" role="joint6">
+            <mechanical_reduction>1.0</mechanical_reduction>
+        </joint>
+    </transmission>
+
+  </xacro:macro>
+
+</robot>

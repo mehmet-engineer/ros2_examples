@@ -10,9 +10,10 @@ find_package(ament_cmake REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(gazebo_ros REQUIRED)
+find_package(ros2_control REQUIRED)
 
 install(
-  DIRECTORY launch worlds
+  DIRECTORY config launch worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
