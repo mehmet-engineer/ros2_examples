@@ -28,11 +28,11 @@ class MyRosClass : public rclcpp::Node
             action_server = rclcpp_action::create_server<MyActionMoveRobot>(
                 this, 
                 action_topic,
-                std::bind(&MyRosClass::handle_goal, this, _1, _2),
+                std::bind(&MyRosClass::handle_goal, this, _1),
                 std::bind(&MyRosClass::handle_cancel, this, _1),
                 std::bind(&MyRosClass::handle_accepted, this, _1));
 
-            rclcpp::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             RCLCPP_INFO(this->get_logger(), "Action server node is ready.");
         }
 
@@ -41,9 +41,7 @@ class MyRosClass : public rclcpp::Node
         std::string service_topic;
         rclcpp_action::Server<MyActionMoveRobot>::SharedPtr action_server;
 
-        rclcpp_action::GoalResponse handle_goal(
-            const rclcpp_action::GoalUUID & uuid,
-            std::shared_ptr<const MyActionMoveRobot::Goal> goal)
+        rclcpp_action::GoalResponse handle_goal(const rclcpp_action::GoalUUID & uuid)
         {
             RCLCPP_INFO(this->get_logger(), "Received goal request.");
             (void)uuid;

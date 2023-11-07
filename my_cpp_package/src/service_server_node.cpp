@@ -16,7 +16,7 @@ class MyServiceNode : public rclcpp::Node
             std::string service_topic = "/my_bool_service";
             service = create_service<std_srvs::srv::SetBool>(service_topic, std::bind(&MyServiceNode::service_callback, this, 
                                                              std::placeholders::_1, std::placeholders::_2));
-            rclcpp::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             RCLCPP_INFO(get_logger(), "Service server node is ready.");
         }
 

@@ -31,7 +31,7 @@ class MyROSClass : public rclcpp::Node
       normal_publisher = this->create_publisher<std_msgs::msg::String>("/cpp_nodes/normal_publisher_topic", 10);
       normal_msg.data = "Hello ROS 2 developer!";
 
-      rclcpp::sleep_for(std::chrono::seconds(1));
+      std::this_thread::sleep_for(std::chrono::seconds(1));
 
     }
 

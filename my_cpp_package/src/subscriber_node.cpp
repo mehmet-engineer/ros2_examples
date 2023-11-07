@@ -31,7 +31,7 @@ class MyROSClass : public rclcpp::Node
                         std::bind(&MyROSClass::subscriber_callback, this, std::placeholders::_1));
       auto js_message = sensor_msgs::msg::JointState();
 
-      rclcpp::sleep_for(std::chrono::seconds(1));
+      std::this_thread::sleep_for(std::chrono::seconds(1));
 
     }
 

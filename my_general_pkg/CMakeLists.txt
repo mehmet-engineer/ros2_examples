@@ -12,6 +12,29 @@ find_package(std_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 
+# cpp executables
+add_executable(executors_example_1 src/executors_example_1.cpp)
+ament_target_dependencies(executors_example_1 rclcpp std_msgs)
+
+add_executable(executors_example_2 src/executors_example_2.cpp)
+ament_target_dependencies(executors_example_2 rclcpp std_msgs)
+
+add_executable(executors_example_3 src/executors_example_3.cpp)
+ament_target_dependencies(executors_example_3 rclcpp std_msgs)
+
+# cpp files
+install(
+  TARGETS executors_example_1 executors_example_2 executors_example_3
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# python files
+install(
+  PROGRAMS scripts/executors_py_example_1.py scripts/executors_py_example_2.py scripts/executors_py_example_3.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# launch files
 install(
   DIRECTORY launch
   DESTINATION share/${PROJECT_NAME}

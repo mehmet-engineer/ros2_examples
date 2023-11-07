@@ -36,7 +36,7 @@ class MyRosClass : public rclcpp::Node
                 is_service_ready = srv_client->wait_for_service(std::chrono::milliseconds(200));
             }
 
-            rclcpp::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             RCLCPP_INFO(this->get_logger(), "Service client node is ready.");
 
             call_service_once();
@@ -75,7 +75,7 @@ class MyRosClass : public rclcpp::Node
             bool data = true;
             int seconds = 3;
             RCLCPP_INFO(this->get_logger(), "Service client will call server with TRUE data after %d seconds...", seconds);
-            rclcpp::sleep_for(std::chrono::seconds(seconds));
+            std::this_thread::sleep_for(std::chrono::seconds(seconds));
             
             call_service(data);
             RCLCPP_INFO(this->get_logger(), "Client process finished.");

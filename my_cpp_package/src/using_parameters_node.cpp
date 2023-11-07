@@ -46,7 +46,7 @@ class MyROSClass : public rclcpp::Node
       timer = this->create_wall_timer(timer_period, std::bind(&MyROSClass::timer_callback, this));
 
       RCLCPP_INFO(this->get_logger(), "using_parameters_node is ready.");
-      rclcpp::sleep_for(std::chrono::seconds(2));
+      std::this_thread::sleep_for(std::chrono::seconds(2));
 
     }
 

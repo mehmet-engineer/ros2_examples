@@ -40,7 +40,7 @@ class MyRosClass : public rclcpp::Node
                 is_action_server_ready = action_client->wait_for_action_server(std::chrono::milliseconds(200));
             }
 
-            rclcpp::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             RCLCPP_INFO(this->get_logger(), "Action client node is ready.");
 
             execute_once();
@@ -106,7 +106,7 @@ class MyRosClass : public rclcpp::Node
         {   
             int seconds = 3;
             RCLCPP_INFO(this->get_logger(), "Action goal will be sent in %d seconds...", seconds);
-            rclcpp::sleep_for(std::chrono::seconds(seconds));
+            std::this_thread::sleep_for(std::chrono::seconds(seconds));
 
             auto target_pos_vector = std::vector<double>(6);
             for (size_t i=0; i<6; i++) {

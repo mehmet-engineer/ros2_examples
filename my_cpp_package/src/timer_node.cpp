@@ -30,7 +30,7 @@ class MyROSClass : public rclcpp::Node
       auto timer_period = std::chrono::milliseconds(2000);
       timer = this->create_wall_timer(timer_period, std::bind(&MyROSClass::timer_callback, this));
 
-      rclcpp::sleep_for(std::chrono::seconds(1));
+      std::this_thread::sleep_for(std::chrono::seconds(1));
 
     }
 
