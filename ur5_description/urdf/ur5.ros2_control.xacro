@@ -3,7 +3,9 @@
 
   <xacro:macro name="ur5_ros2_control">
 
-    <gazebo>
+    <!-- !! ros2 gazebo force torque sensor does not work well with ros2 control !! -->
+
+    <!-- <gazebo>
 
       <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so" >
         <robot_param>robot_description</robot_param>
@@ -71,11 +73,11 @@
         <gaussian_noise>0.01</gaussian_noise>
       </plugin>
 
-    </gazebo>
+    </gazebo> -->
 
 
 
-    <gazebo reference="joint1">
+    <!-- <gazebo reference="joint1">
       <provideFeedback>true</provideFeedback>
     </gazebo>
 
@@ -97,7 +99,7 @@
 
     <gazebo reference="joint6">
       <provideFeedback>true</provideFeedback>
-    </gazebo>
+    </gazebo> -->
 
 
 
