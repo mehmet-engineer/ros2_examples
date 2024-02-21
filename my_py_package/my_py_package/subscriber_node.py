@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 from sensor_msgs.msg import JointState
 
 """
   @author: Mehmet Kahraman
-  @date: 03.10.2023
+  @date: 21.02.2024
   @about: Subscriber node
 """
 
@@ -24,7 +24,7 @@ class MyROSClass(Node):
         self.js_subscription = self.create_subscription(JointState, "/joint_states", self.subscriber_callback, 10)
         self.js_subscription  # prevent unused variable warning
 
-        self.get_clock().sleep_for(Duration(seconds=1)) 
+        time.sleep(1)
         self.get_logger().info("Subscriber node is ready.")
 
 

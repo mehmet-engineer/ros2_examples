@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 from std_srvs.srv import SetBool
 
 """
   @author: Mehmet Kahraman
-  @date: 06.10.2023
+  @date: 21.02.2024
   @about: Service server node
 """
 
@@ -20,7 +20,7 @@ class MyROSClass(Node):
         self.service_topic = "/my_bool_service"
         self.service = self.create_service(SetBool, self.service_topic, self.service_callback)
 
-        self.get_clock().sleep_for(Duration(seconds=1)) 
+        time.sleep(1)
         self.get_logger().info("Service server is ready.")
 
 

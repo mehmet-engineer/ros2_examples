@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-from rclpy.duration import Duration
 from rcl_interfaces.srv import SetParameters, GetParameters
 
 """
   @author: Mehmet Kahraman
-  @date: 09.10.2023
+  @date: 21.02.2024
   @about: Using parameters node
 """
 
@@ -39,7 +39,7 @@ class MyROSClass(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
         self.get_logger().info('using_parameters_node is ready.')
-        self.get_clock().sleep_for(Duration(seconds=1))
+        time.sleep(1)
 
     def timer_callback(self):
         my_frame = self.get_parameter('using_parameters_node/my_frame').get_parameter_value().string_value

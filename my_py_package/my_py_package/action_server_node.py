@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 from rclpy.action import ActionServer, CancelResponse, GoalResponse
 from my_msgs.action import MoveRobot
 
 """
   @author: Mehmet Kahraman
-  @date: 10.10.2023
+  @date: 21.02.2024
   @about: Action server node
 """
 
@@ -28,7 +28,7 @@ class MyROSClass(Node):
             cancel_callback=self.handle_cancel
         )
         
-        self.get_clock().sleep_for(Duration(seconds=1)) 
+        time.sleep(1)
         self.get_logger().info("Action server is ready.")
     
 
@@ -77,7 +77,7 @@ class MyROSClass(Node):
                 break
 
             progress = progress + 10
-            self.get_clock().sleep_for(Duration(seconds=loop_rate))
+            time.sleep(loop_rate)
 
         if (rclpy.ok() == True) and (progress == 100):
             result.finish_success = True

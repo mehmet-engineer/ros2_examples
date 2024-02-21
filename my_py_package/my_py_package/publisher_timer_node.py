@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 from std_msgs.msg import String
 
 """
   @author: Mehmet Kahraman
-  @date: 03.10.2023
+  @date: 21.02.2024
   @about: Publisher timer node
 """
 
@@ -27,7 +27,7 @@ class MyROSClass(Node):
         # timer
         self.timer = self.create_timer(self.timer_period, self.timer_callback)
 
-        self.get_clock().sleep_for(Duration(seconds=1)) 
+        time.sleep(1)
         self.get_logger().info("Publisher node is ready.")
 
 

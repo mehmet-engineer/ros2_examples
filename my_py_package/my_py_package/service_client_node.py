@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 from std_srvs.srv import SetBool
 
 """
   @author: Mehmet Kahraman
-  @date: 06.10.2023
+  @date: 21.02.2024
   @about: Service client node
 """
 
@@ -25,7 +25,7 @@ class MyROSClass(Node):
         while not self.srv_client.wait_for_service(timeout_sec=self.service_wait_timeout):
             self.get_logger().info('waiting for %s service...' %self.service_topic)
     
-        self.get_clock().sleep_for(Duration(seconds=1)) 
+        time.sleep(1)
         self.get_logger().info("Service client is ready.")
 
         self.call_service_once()
@@ -35,7 +35,7 @@ class MyROSClass(Node):
         data = True
         seconds = 3
         self.get_logger().info("Service client will call server with TRUE data after %d seconds..." %seconds)
-        self.get_clock().sleep_for(Duration(seconds=seconds)) 
+        time.sleep(seconds)
         
         self.call_service(data)
         self.get_logger().info("Client process finished.")

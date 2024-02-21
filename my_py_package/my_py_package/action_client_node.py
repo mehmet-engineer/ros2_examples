@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
+import time
 import rclpy
 from rclpy.node import Node
-from rclpy.duration import Duration
 from rclpy.action import ActionClient
 from my_msgs.action import MoveRobot
 
 """
   @author: Mehmet Kahraman
-  @date: 10.10.2023
+  @date: 21.02.2024
   @about: Action client node
 """
 
@@ -25,7 +25,7 @@ class MyROSClass(Node):
         self.action_client.wait_for_server()
         self.get_logger().info("Action client is now connected to action server.")
     
-        self.get_clock().sleep_for(Duration(seconds=1)) 
+        time.sleep(1)
         self.get_logger().info("Action client is ready.")
 
         self.execute_once()
@@ -34,7 +34,7 @@ class MyROSClass(Node):
     def execute_once(self):
         seconds = 3
         self.get_logger().info(f'Action goal will be sent in {seconds} seconds...')
-        self.get_clock().sleep_for(Duration(seconds=seconds)) 
+        time.sleep(seconds)
 
         target_pos_vector = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self.send_goal(target_pos_vector)
