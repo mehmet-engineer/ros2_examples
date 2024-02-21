@@ -2,7 +2,7 @@
 
 ROS2 Humble examples with UR5 robot arm.
 
-*Author: Mehmet Kahraman / Date 11.10.2023*
+*Author: Mehmet Kahraman / Date 21.02.2024*
 
 Main Requirements:
 --
