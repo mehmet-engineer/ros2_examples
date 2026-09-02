@@ -13,9 +13,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/base.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="0 0 3.141592653589793" xyz="0 0 0" />
@@ -36,9 +33,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/shoulder.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="0 0 3.141592653589793" xyz="0 0 0" />
@@ -60,9 +54,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/upperarm.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.138" />
@@ -84,9 +75,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/forearm.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.007" />
@@ -108,9 +96,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/wrist1.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.127" />
@@ -132,9 +117,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/wrist2.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="0 0 0" xyz="0 0 -0.0997" />
@@ -156,9 +138,6 @@
         <geometry>
           <mesh filename="package://ur5_description/meshes/wrist3.dae" />
         </geometry>
-        <material name="LightGrey">
-          <color rgba="0.7 0.7 0.7 1.0" />
-        </material>
       </visual>
       <collision>
         <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.0989" />
