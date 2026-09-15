@@ -14,7 +14,7 @@ find_package(rclpy REQUIRED)
 
 # install required files to share destination
 install(
-    DIRECTORY config launch urdf meshes rviz worlds
+    DIRECTORY config launch urdf meshes rviz
     DESTINATION share/${PROJECT_NAME}/
 )
 
