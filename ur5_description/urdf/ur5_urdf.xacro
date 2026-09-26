@@ -2,6 +2,9 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5">
 
+  <!-- Enable setting arguments from the launch file -->
+  <!-- <xacro:arg name="name" default="ur5"/> -->
+
   <!-- include ur5 macro -->
   <xacro:include filename="$(find ur5_description)/urdf/ur5_joints_links.xacro" />
   <xacro:ur5_joints_links />

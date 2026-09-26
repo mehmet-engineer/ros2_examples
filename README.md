@@ -2,13 +2,14 @@
 
 ROS2 Humble examples with UR5 robot arm.
 
-*Author: Mehmet Kahraman / Date 15.09.2026*
+*Author: Mehmet Kahraman / Date 26.09.2026*
 
 Main Requirements:
 --
 - Ubuntu 22.04 Jammy
 - ROS 2 Humble Desktop
 - Ignition Gazebo Fortress
+- Moveit 2 Humble
 
 Installation and ROS Packages:
 --
@@ -60,13 +61,33 @@ ros2 launch ur5_description display_robot.launch.py
 ```
 ![img](assets/ur5_rviz2.png)
 
-Node example
-```
-ros2 run my_cpp_package publisher_node
-```
-
 Bringup robot on Gazebo Fortress
 ```
 ros2 launch gazebo_robot_sim bringup_robot.launch.py
 ```
 ![img](assets/gz_fortress.png)
+
+Launch Moveit2 & Rviz2 on robot
+```
+ros2 launch gazebo_robot_sim run_moveit_rviz.launch.py
+```
+![img](assets/moveit.png)
+
+
+Running Robot Control Example Nodes:
+--
+
+Moveit2 Joint Control Example C++ Node
+```
+ros2 launch robot_sim run_example1.launch.py
+```
+
+Moveit2 Cartesian Control Example C++ Node
+```
+ros2 launch robot_sim run_example2.launch.py
+```
+
+Moveit2 Joint Trajectory Control Example Python Node
+```
+ros2 launch robot_sim run_example3.launch.py
+```

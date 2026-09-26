@@ -108,6 +108,14 @@ def generate_launch_description():
         }.items()
     )
 
+    ros_gz_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='clock_bridge',
+        output='screen',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock']
+    )
+
     # -------------------------------------------------------------------------
     # SPAWN ROBOT
     # -------------------------------------------------------------------------
@@ -157,6 +165,7 @@ def generate_launch_description():
         robot_state_publisher,
 
         gazebo_fortress,
+        ros_gz_bridge,
         spawn_robot,
 
         load_joint_trajectory_controller
