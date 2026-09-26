@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5">
+
+  <!-- Enable setting arguments from the launch file -->
+  <!-- <xacro:arg name="name" default="ur5"/> -->
+
+  <!-- include ur5 macro -->
+  <xacro:include filename="$(find ur5_description)/urdf/ur5_joints_links.xacro" />
+  <xacro:ur5_joints_links />
+
+  <!-- gripper with adapter -->
+  <xacro:include filename="$(find robotiq_description)/urdf/gripper_adapter.xacro" />
+
+  <!-- include transmissions -->
+  <xacro:include filename="$(find ur5_description)/urdf/ur5_transmissions.xacro" />
+  <xacro:ur5_transmissions />
+
+  <!-- include ur5 ros2_control description -->
+  <xacro:include filename="$(find ur5_description)/urdf/ur5_ros2_control.xacro" />
+  <xacro:ur5_ros2_control />
+
+</robot>
+
+

@@ -52,6 +52,7 @@ colcon build
 source install/setup.bash
 ```
 
+
 Running Launches and Nodes:
 --
 
@@ -72,6 +73,13 @@ Launch Moveit2 & Rviz2 on robot
 ros2 launch gazebo_robot_sim run_moveit_rviz.launch.py
 ```
 ![img](assets/moveit.png)
+
+Launch UR5 robot with Robotiq gripper in Rviz2
+```
+ros2 launch robotiq_description display_robot_gripper.launch.py
+```
+![img](assets/ur5_robotiq_gripper.png)
+
 
 
 Running Robot Control Example Nodes:
