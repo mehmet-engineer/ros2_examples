@@ -1,70 +1,64 @@
-import launch
+from launch import LaunchDescription
+from launch_ros.descriptions import ParameterValue
 from launch.substitutions import (
     Command,
     FindExecutable,
-    LaunchConfiguration,
     PathJoinSubstitution,
 )
-import launch_ros
-import os
+from launch_ros.actions import Node
+from ament_index_python.packages import get_package_share_directory
 
 
 def generate_launch_description():
 
-    pkg_share = launch_ros.substitutions.FindPackageShare(
-        package="robotiq_description"
-    ).find("robotiq_description")
-    
-    gripper_model_path = os.path.join(
-        pkg_share, "urdf", "robotiq_gripper.xacro"
-    )
-    default_rviz_config_path = os.path.join(pkg_share, "rviz", "view_urdf.rviz")
+    # current package path
+    pkg_share_path = get_package_share_directory("robotiq_description")
 
-    args = []
-    args.append(
-        launch.actions.DeclareLaunchArgument(
-            name="rvizconfig",
-            default_value=default_rviz_config_path,
-            description="Absolute path to rviz config file",
-        )
+    # Rviz config path
+    rviz_config_path = PathJoinSubstitution(
+        [pkg_share_path, "rviz", "view_urdf.rviz"]
     )
 
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            gripper_model_path,
+            PathJoinSubstitution(
+                [pkg_share_path, "urdf", "robotiq_gripper.xacro"]
+            ),
+            " ",
+            "name:=ur5"
         ]
     )
-    robot_description_param = {
-        "robot_description": launch_ros.parameter_descriptions.ParameterValue(
-            robot_description_content, value_type=str
-        )
-    }
 
-    robot_state_publisher_node = launch_ros.actions.Node(
+    robot_description = {'robot_description': ParameterValue(robot_description_content, value_type=None)}
+
+    # NODES -----------------------------------------------------------------
+
+    robot_state_publisher_node = Node(
+        name="robot_state_publisher",
         package="robot_state_publisher",
         executable="robot_state_publisher",
-        parameters=[robot_description_param],
+        output="screen",
+        parameters=[robot_description]
     )
-
-    joint_state_publisher_node = launch_ros.actions.Node(
+    joint_state_publisher_gui_node = Node(
+        name="joint_state_publisher_gui",
         package="joint_state_publisher_gui",
-        executable="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui"
     )
-
-    rviz_node = launch_ros.actions.Node(
+    rviz_node = Node(
+        name="rviz2",
         package="rviz2",
         executable="rviz2",
-        name="rviz2",
         output="screen",
-        arguments=["-d", LaunchConfiguration("rvizconfig")],
+        arguments=["-d", rviz_config_path],
     )
 
-    nodes = [
-        robot_state_publisher_node,
-        joint_state_publisher_node,
-        rviz_node,
-    ]
-
-    return launch.LaunchDescription(args + nodes)
+    return LaunchDescription(
+        [   
+            joint_state_publisher_gui_node,        
+            robot_state_publisher_node,
+            rviz_node,
+        ]
+    )
