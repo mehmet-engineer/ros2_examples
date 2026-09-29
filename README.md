@@ -95,7 +95,7 @@ Moveit2 Cartesian Control Example C++ Node
 ros2 launch robot_sim run_example2.launch.py
 ```
 
-Moveit2 Joint Trajectory Control Example Python Node
+Joint Trajectory Control Example Python Node
 ```
 ros2 launch robot_sim run_example3.launch.py
 ```
